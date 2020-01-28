@@ -1,0 +1,2 @@
+# cpp-fractal
+Generates fractals
