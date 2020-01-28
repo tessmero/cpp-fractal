@@ -19,3 +19,5 @@ Then run the executable that was created
 ```
 ./cpp-fractal
 ```
+
+This creates the image file ```test.png```
