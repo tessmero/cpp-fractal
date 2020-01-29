@@ -1,3 +1,11 @@
 include_directories(${cpp-fractal_SOURCE_DIR}/libs/include)
-add_executable(cpp-fractal main.cpp)
+include_directories(${cpp-fractal_SOURCE_DIR}/main/include)
+
+set(SOURCES
+    main.cpp
+    graphics.cpp
+)
+
+add_executable(cpp-fractal ${SOURCES})
+
 target_link_libraries(cpp-fractal libs)
