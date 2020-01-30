@@ -4,6 +4,7 @@ include_directories(${cpp-fractal_SOURCE_DIR}/main/include)
 set(SOURCES
     main.cpp
     graphics.cpp
+    fractal.cpp
 )
 
 add_executable(cpp-fractal ${SOURCES})
