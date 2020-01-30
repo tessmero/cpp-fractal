@@ -2,12 +2,10 @@
 #include "fractal.h"
 #include <vector>
 
-//debug
-#include <iostream>
-
 using namespace std;
 
-
+// convenience function to declare vectors 
+// in a way that works with old compilers
 vector<float> vec(float* x, unsigned s){
   vector<float> result(x, x + s); 
   return result;

@@ -3,9 +3,6 @@
 #include <vector>
 #include <math.h>
 
-//debug
-#include <iostream>
-
 using namespace std;
 
 int sign(float val) {
