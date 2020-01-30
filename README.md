@@ -1,6 +1,8 @@
 # cpp-fractal
 
-A C++ program that generates a png image.
+A C++ program that generates a fractal. The fractal can be customized, but can only contain vertical or horizontal line segments.
+
+![Image](test.png?raw=true)
 
 Clone this repository and build using cmake.
 
