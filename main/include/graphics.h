@@ -4,6 +4,9 @@
 #include "color.h"
 #include "shape.h"
 #include <vector>
+#include <string>
+
+using namespace std;
 
 class Graphics
 {
@@ -22,7 +25,7 @@ public:
   void drawShape( Shape s );
   void fillRect( unsigned x, unsigned y, unsigned w, unsigned h );
     
-  void savePng( const char* filename );
+  void savePng( string filename );
   
   void setColor( Color color ){ m_color = color; }
   unsigned getWidth(){ return m_width; }

@@ -1,43 +1,43 @@
 #include "graphics.h"
 #include "fractal.h"
-#include "json.hpp"
-#include <vector>
+#include "i_config.h"
+#include "json_config.h"
+#include "default_config.h"
 
-// for convenience
-using json = nlohmann::json;
+#include <vector>
+#include <iostream> 
+#include <string>
 
 using namespace std;
 
 
-int main(int argc, char *argv[]) {
+Shape buildFractal( IConfig &config ) {
   
-  // rshape (recursive shape) describes the fine details of the fractal
-  // must be composed of horizontal and vertical segments
-  // must have terminals at (0,0) and (1,0)
-  vector<float> rx = {0,.4,.4,.6,.6,1};
-  vector<float> ry = {0,0,.2,.2,0,0};
-  Shape rshape( rx, ry );
+  Shape rshape = config.getRShape();
+  Shape bshape = config.getBShape();
+  unsigned depth = config.getDepth();
+  bool flip_rshape = config.getFlip();
+  
 
-  // bshape (base shape) describes the overall shape of the fractal
-  // must be composed of horizontal and vertical segments
-  // units are pixels
-  vector<float> bx = {100,100,412,412,100};
-  vector<float> by = {100,412,412,100,100};
-  Shape bshape( bx, by );
-
-  // complexity of the fractal
-  unsigned depth = 4;
-
-  // generate the fractal
+  cout << "generating fractal..." << endl;
   Fractal f(rshape);
   Shape s(bshape);
   for( unsigned i = 0 ; i < depth ; i++ ) {
     s = f.deepen(s);
-    f.flip_rshape(); //(optional) makes the fractal more interesting
+    if( flip_rshape ) {
+      f.flip_rshape(); 
+    }
   }
   
-  // draw the fractal
-  unsigned width = 512, height = 512;
+  return s;
+}
+
+void drawFractal( Shape s, IConfig &config ) {
+  
+  unsigned width = config.getOutputWidth();
+  unsigned height = config.getOutputHeight();
+  string fname = config.getOutputFilename();
+  
   Graphics g(width, height);
   
   g.setColor( Color( 255, 255, 255, 255 ) );
@@ -46,5 +46,29 @@ int main(int argc, char *argv[]) {
   g.setColor( Color( 0, 0, 0, 255 ) );
   g.drawShape( s );
   
-  g.savePng( "test.png" );
+  g.savePng( fname );
+  cout << "saved fractal image " << fname << endl;
+}
+
+int main(int argc, char *argv[]) {
+  
+  IConfig* config;
+  
+  if( argc == 1 ) {
+    cout << "No arguments given. Using default fractal settings." << endl;
+    config = new DefaultConfig();
+    
+  } else {
+    char* json_filename = argv[1];
+    cout << "reading fractal configuration file " << json_filename << endl;
+    config = new JsonConfig(json_filename);
+  }
+    
+    
+  // generate the fractal
+  Shape s = buildFractal( *config );
+  
+  // draw the fractal
+  drawFractal( s, *config );
+  
 }

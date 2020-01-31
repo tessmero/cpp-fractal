@@ -2,7 +2,11 @@
 #include "color.h"
 #include "shape.h"
 #include "lodepng.h"
+
 #include <iostream>
+#include <string>
+
+using namespace std;
 
 Graphics::Graphics( unsigned width, unsigned height ) {
   m_width = width;
@@ -71,9 +75,9 @@ void Graphics::fillRect( unsigned x, unsigned y, unsigned w, unsigned h ) {
   }
 }
 
-void Graphics::savePng( const char* filename ) {
+void Graphics::savePng( string filename ) {
   
   unsigned error = lodepng::encode(filename, m_image, m_width, m_height);
 
-  if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
+  if(error) cout << "encoder error " << error << ": "<< lodepng_error_text(error) << endl;
 }

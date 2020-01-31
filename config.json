@@ -1,0 +1,49 @@
+{
+  "bshape":{
+    "notes": [
+      "bshape (base shape) describes the overall shape of the fractal",
+      "must be composed of horizontal and vertical segments",
+      "units are pixels"
+    ],
+    "x": [100,100,412,412,100],
+    "y": [100,412,412,100,100]
+  },
+  
+  "rshape":{
+    "notes": [
+      "rshape (recursive shape) describes the fine details of the fractal",
+      "must be composed of horizontal and vertical segments",
+      "must have terminals at (0,0) and (1,0)"
+    ],
+    "x": [0,0.4,0.4,0.6,0.6,1],
+    "y": [0,0,0.2,0.2,0,0]
+  },
+    
+  "depth":{
+    "notes": [
+      "depth is the complexity of the fractal",
+      "if depth is zero, the resulting fractal is the base shape"
+    ],
+    "value": 2
+  },
+  
+  "flip":{
+    "notes": [
+      "If flip is true, the recursive shape will be flipped",
+      "along the x-axis after each depth iteration", 
+      "this has no effect if depth is less than two"
+    ],
+    "value": true
+  },
+  
+  "output":{
+    "notes": [
+      "output defines properties of the resulting fractal image",
+      "the filename should always end wiht .png",
+      "width and height are in pixels"
+    ],
+    "filename": "fractal.png",
+    "width": 500,
+    "height": 500
+  }
+}
